@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
                 while(getline(ss,temp,',')){
                     if(index!=5){
                     if(cat==0){
-                        title=temp;v //parses out only the first on each like to create a hash table
+                        title=temp; //parses out only the first on each like to create a hash table
                         //cout<<hashTable[indexFinder].title<<endl;
                         //indexFinder++;
                         cat++;
@@ -113,20 +113,34 @@ int main(int argc, char* argv[])
                 getline(cin,inputString1);
                 cout<<"Enter second movie title:"<<endl;
                 getline(cin,inputString2);
+
+                //**** check for valid strings here *** -m
+                //Also: Causes problems with getting the times when you enter the same movie. -m
                 h.doubleFeature(inputString1,inputString2);
             }
+
+            // ** Maybe make it possible to get input it non-military time/ different formats -m
+
             else if(menuPick=="4"){ //See what movies begin at a certain time, so you can find the most convenient movie showing for you!
                 cout<<"Enter the current time (in military time):"<<endl;
                 getline(cin,inputString1);
                 int inputInt=atoi(inputString1.c_str());
                 h.atThisTime(inputInt);
+                //string time=h.convertToStandardTime(inputInt);
+                //cout << "Time: " << time << endl;
             }
             else if(menuPick=="5"){ //Pick a random movie, with a random screening time
                 h.randomMovie();
             }
+
+            //**Can have a movie that starts at the same time one ends, probably (minor thing) -m
+
             else if(menuPick=="6"){ //Just like above, but makes sure that the movies don't conflict and creates a back-to-back experience
                 h.randomDouble();
             }
+
+
+
             else if(menuPick=="7"){ //Quit
                 cout<<"Goodbye!"<<endl;
                 noQuit=false;

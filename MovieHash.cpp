@@ -51,7 +51,7 @@ void MovieHash::printTableContents(){
         if(hashTable[x]!=NULL){
             tmp=hashTable[x];
             while(tmp!=NULL){
-                cout<<tmp->title<<": "<<tmp->startTime<<" to "<<tmp->endTime<<endl;
+                cout<<tmp->title<<": "<<convertToStandardTime(tmp->startTime)<<" to "<<convertToStandardTime(tmp->endTime)<<endl;
                 tmp=tmp->next;
             }
         }
@@ -67,7 +67,7 @@ void MovieHash::findMovie(std::string name){
             tmp=hashTable[x];
             while(tmp!=NULL){
                 if(tmp->title==name){
-                    cout<<name<<": from "<<tmp->startTime<<" to "<<tmp->endTime<<endl;
+                    cout<<name<<": from "<<convertToStandardTime(tmp->startTime) <<" to "<<convertToStandardTime(tmp->endTime)<<endl;
                     tmp=tmp->next;
                     found=true;
                 }
@@ -325,10 +325,36 @@ void MovieHash::atThisTime(int time){
             tmp=hashTable[x];
             while(tmp!=NULL){
                 if(tmp->startTime==time){
-                    cout<<tmp->title<<": from "<<tmp->startTime<<" to "<<tmp->endTime<<endl;
+                    cout<<tmp->title<<": from "<<convertToStandardTime(tmp->startTime)<<" to "<<convertToStandardTime(tmp->endTime)<<endl;
                 }
                 tmp=tmp->next;
             }
         }
     }
+}
+
+
+string MovieHash::convertToStandardTime(int mil){
+    int temp=mil;
+    string time="";
+    string ending = " am";
+
+    if(temp >= 1300){
+        temp = temp - 1200;
+        ending=" pm";
+    }
+    string tmp=to_string(temp);
+
+    if(temp < 1000){
+        time+= tmp.substr(0, 1);
+        time += ":";
+        time += tmp.substr(1,2) + ending;
+    }
+    else{
+        time += tmp.substr(0, 2)+ ":" +tmp.substr(2, 2) + ending;
+
+    }
+    return time;
+
+
 }

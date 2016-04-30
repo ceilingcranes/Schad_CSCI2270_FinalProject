@@ -43,6 +43,7 @@ class MovieHash
         void randomDouble();
         void randomDoubleFeature(std::string inputString1, std::string inputString2);
         void atThisTime(int time);
+        std::string convertToStandardTime(int mil);
     protected:
     private:
         int s = 5;
